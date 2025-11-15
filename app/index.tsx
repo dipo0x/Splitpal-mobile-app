@@ -1,15 +1,6 @@
-import { Text, View } from "react-native";
+import RootRouter from "@/src/routers";
+import "react-native-reanimated";
 
-export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
-  );
+export default function RootLayout() {
+  return <RootRouter />;
 }
