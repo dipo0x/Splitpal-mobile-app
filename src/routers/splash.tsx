@@ -1,7 +1,7 @@
-import SplashScreen from "@/screens/walkthrough/splash";
-import WalkthroughScreen from "@/screens/walkthrough";
-import { WalkthroughStackParamList } from "@/types/types";
-import { screenOptions } from "@/utils/stack_options";
+import WalkthroughScreen from "@/src/screens/walkthrough";
+import SplashScreen from "@/src/screens/walkthrough/splash";
+import { WalkthroughStackParamList } from "@/src/types/types";
+import { screenOptions } from "@/src/utils/stack_options";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 

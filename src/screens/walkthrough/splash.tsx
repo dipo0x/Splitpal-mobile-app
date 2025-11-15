@@ -1,24 +1,26 @@
-import { View, StyleSheet, Image } from "react-native";
-import React, { useEffect } from "react";
-import ScreenView from "@/src/layout/screenView";
+import ScreenView from "@/src/layout/appStatusBar";
 import { SplashScreenProps } from "@/src/types/types";
-// import { HEIGHT } from "@/constants/size";
+import React, { useEffect } from "react";
+import { Image, StatusBar, StyleSheet } from "react-native";
 
 const SplashScreen = ({ navigation }: SplashScreenProps) => {
   useEffect(() => {
-    setTimeout(() => {
+    // Force status bar style immediately
+    StatusBar.setBarStyle("dark-content", true);
+    
+    const timer = setTimeout(() => {
       navigation.navigate("walkthrough-screen");
     }, 2000);
+
+    return () => clearTimeout(timer);
   }, [navigation]);
+
   return (
-    <ScreenView>
-     <View
-      style={ styles.logo}
-    >
-       <Image source={require("@/assets/images/splitpal-logo.png")}
-       style={{ width: 100, height: 100 }}
-          />
-    </View>
+    <ScreenView style={styles.logo} backgroundColor="#FFFFFF">
+      <Image
+        source={require("@/assets/images/splitpal-logo.png")}
+        style={{ width: 50, height: 50 }}
+      />
     </ScreenView>
   );
 };
@@ -27,9 +29,8 @@ export default SplashScreen;
 
 const styles = StyleSheet.create({
   logo: {
-    flex: 1,
+    backgroundColor: "#FFFFFF",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
   },
 });
