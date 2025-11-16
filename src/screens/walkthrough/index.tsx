@@ -1,16 +1,15 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { ColorValue, StatusBar, StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View, StyleSheet, ColorValue, Text } from "react-native";
+import AppStatusBar from "@/src/layout/appStatusBar";
 
 const buttonColors: readonly [ColorValue, ColorValue] = ["#F6F7FF", "#EAF6F6"];
 
 export default function Index() {
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar
-        translucent
-        backgroundColor="transparent"
-        barStyle="dark-content"
+    <View style={styles.container}>
+      <AppStatusBar
+        backgroundColor={buttonColors[0] as string}
+
       />
       <LinearGradient
         colors={buttonColors}
@@ -22,7 +21,7 @@ export default function Index() {
           <Text style={{ color: "black" }}>button section</Text>
         </View>
       </LinearGradient>
-    </SafeAreaView>
+    </View>
   );
 }
 
