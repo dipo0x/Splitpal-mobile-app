@@ -3,13 +3,11 @@ import OnboardingProgress from "@/src/components/ui/splash/OnboardingProgress";
 import AppStatusBar from "@/src/layout/appStatusBar";
 import styles from "@/src/styles/walkthrough/style.walkthrough";
 import { LinearGradient } from "expo-linear-gradient";
-import { useRouter } from "expo-router";
 import { ColorValue, Image, Text, View } from "react-native";
 
 const buttonColors: readonly [ColorValue, ColorValue] = ["#F6F7FF", "#EAF6F6"];
 
-export default function Index() {
-  const router = useRouter();
+const ViewBillsScreen = ({ navigation }: any) => {
   return (
     <View style={styles.splashContainer}>
       <AppStatusBar backgroundColor={buttonColors[0] as string} />
@@ -21,37 +19,38 @@ export default function Index() {
       >
         <View>
           <Image
-            source={require("@/assets/images/artwork.png")}
+            source={require("@/assets/images/view-bills-image.png")}
             style={styles.image}
           />
         </View>
       </LinearGradient>
       <View style={styles.buttonContainer}>
         <Text style={styles.mainText}>
-          The Easy Way To Split Expenses With Friends
+          Bills Made Clear, Splits Made Easy
         </Text>
         <Text style={styles.subText}>
-          Quickly share group expenses, keep everything fair, and avoid the
-          awkward money talk.
+          Every detail of the bill is visible so your friends always know exactly what they’re paying for.
         </Text>
-        <View style={{ width: "100%" , paddingTop: 30, marginBottom: 30}}>
-          <OnboardingProgress currentStep={1} />
+        <View style={{ width: "100%", paddingTop: 30, marginBottom: 30 }}>
+          <OnboardingProgress currentStep={2} />
         </View>
         <SplashButton
           border={true}
           text="Skip"
           onPress={() => {
-            router.push("login-screen");
+            navigation.navigate("login-screen");
           }}
         />
         <SplashButton
           border={false}
           text="Next"
           onPress={() => {
-             router.push("view-bills-screen");
+            navigation.navigate("view-bills-screen");
           }}
         />
       </View>
     </View>
   );
-}
+};
+
+export default ViewBillsScreen;

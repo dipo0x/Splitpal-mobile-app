@@ -7,7 +7,7 @@ import { ColorValue, Image, Text, View } from "react-native";
 
 const buttonColors: readonly [ColorValue, ColorValue] = ["#F6F7FF", "#EAF6F6"];
 
-export default function Index() {
+const BillsScreen = ({ navigation }: any) => {
   return (
     <View style={styles.splashContainer}>
       <AppStatusBar backgroundColor={buttonColors[0] as string} />
@@ -32,24 +32,26 @@ export default function Index() {
           Quickly share group expenses, keep everything fair, and avoid the
           awkward money talk.
         </Text>
-        <View style={{ width: "100%" , paddingTop: 30, marginBottom: 30}}>
+        <View style={{ width: "100%", paddingTop: 30, marginBottom: 30 }}>
           <OnboardingProgress currentStep={1} />
         </View>
         <SplashButton
           border={true}
           text="Skip"
           onPress={() => {
-            console.log("skip to login");
+            navigation.navigate("login-screen");
           }}
         />
         <SplashButton
           border={false}
           text="Next"
           onPress={() => {
-            console.log("next page");
+            navigation.navigate("view-bills-screen");
           }}
         />
       </View>
     </View>
   );
-}
+};
+
+export default BillsScreen;
