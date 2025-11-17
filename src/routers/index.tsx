@@ -1,5 +1,5 @@
 import { RootStackParamList } from "@/src/types/types";
-import { screenOptions } from "@/src/utils/stack_options";
+import { screenOptions } from "@/src/utils/stack_options.utils";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import WalkStack from "./splash";
@@ -7,9 +7,9 @@ import WalkStack from "./splash";
 const Stack = createStackNavigator<RootStackParamList>();
 const RootRouter = () => {
   return (
-      <Stack.Navigator screenOptions={screenOptions}>
-        <Stack.Screen name="walkthrough-stack" component={WalkStack} />
-      </Stack.Navigator>
+    <Stack.Navigator screenOptions={screenOptions}>
+      <Stack.Screen name="walkthrough-stack" component={WalkStack} />
+    </Stack.Navigator>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { StatusBar, StyleSheet, View, Platform } from "react-native";
+import { StatusBar, View, Platform } from "react-native";
 
 interface Props {
   children?: ReactNode;
@@ -8,10 +8,10 @@ interface Props {
 
 const AppStatusBar: React.FC<Props> = ({
   children,
-  backgroundColor = "black",
+  backgroundColor = "white",
 }) => {
   return (
-    <View style={[styles.container, { backgroundColor }]}>
+    <View style={[ { backgroundColor }]}>
       <View
         style={{
           height: Platform.OS === "ios" ? 44 : StatusBar.currentHeight,
@@ -29,9 +29,5 @@ const AppStatusBar: React.FC<Props> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-});
 
 export default AppStatusBar;

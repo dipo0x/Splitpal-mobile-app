@@ -1,38 +1,51 @@
-import { LinearGradient } from "expo-linear-gradient";
-import { View, StyleSheet, ColorValue, Text } from "react-native";
+import SplashButton from "@/src/components/buttons/splash/button";
 import AppStatusBar from "@/src/layout/appStatusBar";
+import styles from "@/src/styles/walkthrough/style.walkthrough";
+import { LinearGradient } from "expo-linear-gradient";
+import { ColorValue, Image, Text, View } from "react-native";
 
 const buttonColors: readonly [ColorValue, ColorValue] = ["#F6F7FF", "#EAF6F6"];
 
 export default function Index() {
   return (
-    <View style={styles.container}>
-      <AppStatusBar
-        backgroundColor={buttonColors[0] as string}
-
-      />
+    <View style={styles.splashContainer}>
+      <AppStatusBar backgroundColor={buttonColors[0] as string} />
       <LinearGradient
         colors={buttonColors}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={styles.gradient}
       >
-        <View style={styles.contentContainer}>
-          <Text style={{ color: "black" }}>button section</Text>
+        <View>
+          <Image
+            source={require("@/assets/images/Artboard mask.png")}
+            style={styles.image}
+          />
         </View>
       </LinearGradient>
+      <View style={styles.buttonContainer}>
+        <Text style={styles.mainText}>
+          The Easy Way To Split Expenses With Friends
+        </Text>
+        <Text style={styles.subText}>
+          Quickly share group expenses, keep everything fair, and avoid the
+          awkward money talk.
+        </Text>
+        <SplashButton
+          border={true}
+          text="Skip"
+          onPress={() => {
+            console.log("skip to login");
+          }}
+        />
+        <SplashButton
+          border={false}
+          text="Next"
+          onPress={() => {
+            console.log("next page");
+          }}
+        />
+      </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  gradient: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  contentContainer: {},
-});
