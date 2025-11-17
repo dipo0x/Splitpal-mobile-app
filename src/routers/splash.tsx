@@ -1,4 +1,4 @@
-import WalkthroughScreen from "@/src/screens/walkthrough";
+import WalkthroughScreen from "@/src/screens/walkthrough/bills";
 import SplashScreen from "@/src/screens/walkthrough/splash";
 import { WalkthroughStackParamList } from "@/src/types/types";
 import { screenOptions } from "@/src/utils/stack_options.utils";
@@ -13,7 +13,8 @@ const WalkStack = () => {
       screenOptions={screenOptions}
     >
       <Stack.Screen name="splash-screen" component={SplashScreen} />
-      <Stack.Screen name="walkthrough-screen" component={WalkthroughScreen} />
+      <Stack.Screen name="bills-screen" component={WalkthroughScreen} />
+      <Stack.Screen name="view-bills-screen" component={WalkthroughScreen} />
     </Stack.Navigator>
   );
 };

@@ -21,7 +21,7 @@ const SplashButton = (props: Props) => {
         ...(border ? styles.border : styles.nonBorder),
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 30,
+
       }}
     >
       <Text style={[border ? styles.borderText : styles.nonBorderText]}>
@@ -47,4 +47,5 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
+
 export default SplashButton;

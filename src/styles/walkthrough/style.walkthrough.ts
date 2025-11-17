@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
   },
   subText: {
     paddingHorizontal: 40,
-
     textAlign: "center",
     fontFamily: "Satoshi-Regular",
     color: colors.grayText,
