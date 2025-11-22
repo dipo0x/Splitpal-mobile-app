@@ -5,7 +5,7 @@ import SocialLoginCard from "@/src/components/ui/splash/SocialLoginCard";
 import AuthWrapper from "@/src/components/wrappers/auth/AuthWrapper";
 import React, { useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-
+import { EMAIL, PASSWORD } from "@/src/const/auth.const";
 const LoginScreen = ({ navigation }: any) => {
   const [emailAddress, setEmailAddress] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -14,7 +14,7 @@ const LoginScreen = ({ navigation }: any) => {
   console.log(isChecked);
 
   return (
-    <AuthWrapper formHeight={"75%"}>
+    <AuthWrapper formHeight={"78%"}>
       <View style={styles.container}>
         <View style={{ alignItems: "center" }}>
           <Image
@@ -34,6 +34,7 @@ const LoginScreen = ({ navigation }: any) => {
             style={{
               color: "#5F6368",
               marginTop: 20,
+              marginBottom: 20,
               fontFamily: "Satoshi-Regular",
             }}
           >
@@ -45,11 +46,11 @@ const LoginScreen = ({ navigation }: any) => {
             returnKeyType="next"
             autoCapitalize="none"
             value={emailAddress}
-            placeholder="Email Address"
+            placeholder= {EMAIL}
             secureTextEntry={false}
           ></AuthInput>
           <AuthInput
-            placeholder="Password"
+            placeholder= {PASSWORD}
             value={password}
             secureTextEntry={true}
           ></AuthInput>
@@ -74,7 +75,7 @@ const LoginScreen = ({ navigation }: any) => {
             style={{
               marginLeft: "auto",
               marginRight: 16,
-              fontFamily: "Satoshi-Medium",
+              fontFamily: "Satoshi-Bold",
               color: "rgba(20, 125, 128, 1)",
               paddingTop: 20,
             }}
