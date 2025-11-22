@@ -4,7 +4,7 @@
     "slug": "splitpal",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/splitpal-logo.png",
     "scheme": "splitpal",
    
     "newArchEnabled": true,

@@ -3,11 +3,14 @@ import { TextInput, View } from "react-native";
 import styles from "../../../styles/input/style.input";
 
 const AuthInput = (props: any) => {
-  const { placeholder, secureTextEntry } = props;
+  const { autoComplete, keyboardType, returnKeyType, autoCapitalize, placeholder, secureTextEntry } = props;
   return (
     <View style={styles.inputContainer}>
       <TextInput
-        autoCapitalize="none"
+        autoComplete= { autoComplete}
+        keyboardType={ keyboardType }
+        returnKeyType={ returnKeyType}
+        autoCapitalize= { autoCapitalize }
         style={styles.input}
         placeholderTextColor="#5F6368"
         placeholder={placeholder}
