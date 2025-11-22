@@ -1,27 +1,28 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 type Props = {
+  width: number;
+  height: number;
   text: string;
   border?: boolean;
 
   onPress: () => void;
 };
 const SplashButton = (props: Props) => {
-  const { text, border, onPress } = props;
+  const { width, height, text, border, onPress } = props;
   return (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.7}
       style={{
         flexDirection: "row",
-        width: "37%",
-        height: "18%",
+        width,
+        height,
         borderRadius: 40,
         borderWidth: 0.8,
         ...(border ? styles.border : styles.nonBorder),
         justifyContent: "center",
         alignItems: "center",
-
       }}
     >
       <Text style={[border ? styles.borderText : styles.nonBorderText]}>

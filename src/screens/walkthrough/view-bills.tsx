@@ -25,27 +25,30 @@ const ViewBillsScreen = ({ navigation }: any) => {
         </View>
       </LinearGradient>
       <View style={styles.buttonContainer}>
-        <Text style={styles.mainText}>
-          Bills Made Clear, Splits Made Easy
-        </Text>
+        <Text style={styles.mainText}>Bills Made Clear, Splits Made Easy</Text>
         <Text style={styles.subText}>
-          Every detail of the bill is visible so your friends always know exactly what they’re paying for.
+          Every detail of the bill is visible so your friends always know
+          exactly what they’re paying for.
         </Text>
         <View style={{ width: "100%", paddingTop: 30, marginBottom: 30 }}>
           <OnboardingProgress currentStep={2} />
         </View>
         <SplashButton
+        width={130}
+          height={58}
           border={true}
           text="Skip"
           onPress={() => {
-            navigation.navigate("login-screen");
+            navigation.navigate("auth-stack", { screen: "login-screen" });
           }}
         />
         <SplashButton
+          width={130}
+          height={58}
           border={false}
           text="Next"
           onPress={() => {
-            navigation.navigate("view-bills-screen");
+            navigation.navigate("auth-stack", { screen: "login-screen" });
           }}
         />
       </View>

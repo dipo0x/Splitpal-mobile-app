@@ -49,6 +49,10 @@ const styles = StyleSheet.create({
     fontFamily: "Satoshi-Regular",
     color: colors.grayText,
   },
+  formSection: {
+    backgroundColor: "rgba(255, 255, 255, 0.6)",
+    borderRadius: 15,
+  },
 });
 
 export default styles;

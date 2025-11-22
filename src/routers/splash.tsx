@@ -1,6 +1,6 @@
 import BillsScreen from "@/src/screens/walkthrough/bills";
-import ViewBillsScreen from "@/src/screens/walkthrough/view-bills";
 import SplashScreen from "@/src/screens/walkthrough/splash";
+import ViewBillsScreen from "@/src/screens/walkthrough/view-bills";
 import { WalkthroughStackParamList } from "@/src/types/types";
 import { screenOptions } from "@/src/utils/stack_options.utils";
 import { createStackNavigator } from "@react-navigation/stack";

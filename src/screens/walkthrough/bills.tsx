@@ -36,13 +36,17 @@ const BillsScreen = ({ navigation }: any) => {
           <OnboardingProgress currentStep={1} />
         </View>
         <SplashButton
+          width={130}
+          height={58}
           border={true}
           text="Skip"
           onPress={() => {
-            navigation.navigate("login-screen");
+            navigation.navigate("auth-stack", { screen: "login-screen" });
           }}
         />
         <SplashButton
+          width={130}
+          height={58}
           border={false}
           text="Next"
           onPress={() => {

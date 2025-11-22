@@ -13,4 +13,9 @@ export type SplashScreenProps = StackScreenProps<
 
 export type RootStackParamList = {
   "walkthrough-stack": undefined;
+  "auth-stack": undefined;
+};
+
+export type AuthStackParamList = {
+  "login-screen": undefined;
 };
