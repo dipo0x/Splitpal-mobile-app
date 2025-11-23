@@ -1,11 +1,15 @@
 import { FirebaseError } from "firebase/app";
 import {
   User,
+  createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { doc, getFirestore, setDoc } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
+
+const db = getFirestore();
 
 type AuthResult = { message: string; isEmail: boolean };
 
@@ -16,6 +20,13 @@ type AuthContextType = {
     email: string,
     password: string,
     remember?: boolean
+  ) => Promise<AuthResult | null>;
+  signUp: (
+    email: string,
+    password: string,
+    fullName: string,
+
+    username: string
   ) => Promise<AuthResult | null>;
 };
 
@@ -109,8 +120,97 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const signUp = async (
+    email: string,
+    password: string,
+    fullName: string,
+    username: string,
+    remember = false
+  ) => {
+    try {
+      const auth = getAuth();
+      const providerData: { fullName: string; username: string } = {
+        fullName,
+        username,
+      };
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = userCredential.user;
+      if (user) {
+        const uid = user.uid;
+        const userData = providerData;
+        await setDoc(doc(db, "users", uid), userData);
+      }
+
+      setUser(userCredential.user);
+      return null;
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        switch (error.code) {
+          case "auth/invalid-email":
+            console.log(error);
+            return {
+              message: "The email address is not valid.",
+              isEmail: true,
+            };
+          case "auth/user-not-found":
+            return {
+              message: "No account found with this email.",
+              isEmail: true,
+            };
+          case "auth/user-disabled":
+            return { message: "This user has been disabled.", isEmail: true };
+          case "auth/wrong-password":
+            return {
+              message: "Incorrect password. Please try again.",
+              isEmail: false,
+            };
+          case "auth/invalid-credential":
+            return {
+              message: "Email or password is invalid.",
+              isEmail: false,
+            };
+          case "auth/too-many-requests":
+            return {
+              message: "Too many attempts. Try again later.",
+              isEmail: false,
+            };
+          case "auth/network-request-failed":
+            return {
+              message: "Network error. Check your connection and try again.",
+              isEmail: false,
+            };
+          case "auth/email-already-in-use":
+            return {
+              message: "Email already in use.",
+              isEmail: true,
+            };
+          default:
+            return {
+              message: error.message || "An error occurred during sign in.",
+              isEmail: false,
+            };
+        }
+      }
+
+      // Non-Firebase errors
+      if (error instanceof Error) {
+        return { message: error.message, isEmail: false };
+      }
+
+      return {
+        message: "An unknown error occurred during sign in.",
+        isEmail: false,
+      };
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isLoadingUser, signIn }}>
+    <AuthContext.Provider value={{ user, isLoadingUser, signIn, signUp }}>
       {children}
     </AuthContext.Provider>
   );
