@@ -3,15 +3,46 @@ import AuthInput from "@/src/components/input/auth/auth.input";
 import Checkbox from "@/src/components/ui/CheckBox";
 import SocialLoginCard from "@/src/components/ui/splash/SocialLoginCard";
 import AuthWrapper from "@/src/components/wrappers/auth/AuthWrapper";
+import { EMAIL, PASSWORD } from "@/src/const/auth.const";
+import { useAuth } from "@/src/lib/authcontext";
 import React, { useState } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { EMAIL, PASSWORD } from "@/src/const/auth.const";
+
 const LoginScreen = ({ navigation }: any) => {
-  const [emailAddress, setEmailAddress] = useState<string>("");
+  const [email, setEmailAddress] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isChecked, setChecked] = useState(false);
+  const [error, setError] = useState<{
+    isEmail: boolean;
+    message: string;
+  } | null>(null);
 
-  console.log(isChecked);
+  const { signIn } = useAuth();
+
+  const handleAuth = async () => {
+    setError(null);
+    if (!email) {
+      setError({ isEmail: true, message: "Please fill in your email" });
+      return;
+    }
+    if (!password) {
+      setError({ isEmail: false, message: "Please fill in your password" });
+      return;
+    }
+
+    if (password.length < 6) {
+      setError({
+        isEmail: false,
+        message: "Passwords must be at least 6 characters long.",
+      });
+      return;
+    }
+
+    const result = await signIn(email, password, isChecked);
+    if (result) {
+      setError(result);
+    }
+  };
 
   return (
     <AuthWrapper formHeight={"78%"}>
@@ -41,18 +72,25 @@ const LoginScreen = ({ navigation }: any) => {
             Enter your email and password to log in
           </Text>
           <AuthInput
+            hasError={error?.isEmail}
+            error={error?.message}
             autoComplete="email"
             keyboardType="email-address"
             returnKeyType="next"
             autoCapitalize="none"
-            value={emailAddress}
-            placeholder= {EMAIL}
+            value={email}
+            placeholder={EMAIL}
             secureTextEntry={false}
+            onChangeText={(text: string) => setEmailAddress(text)}
           ></AuthInput>
           <AuthInput
-            placeholder= {PASSWORD}
+            hasError={error ? !error.isEmail : false}
+            error={error?.message}
+            autoComplete="password"
+            placeholder={PASSWORD}
             value={password}
             secureTextEntry={true}
+            onChangeText={(text: string) => setPassword(text)}
           ></AuthInput>
         </View>
         <View style={{ flexDirection: "row" }}>
@@ -95,9 +133,7 @@ const LoginScreen = ({ navigation }: any) => {
             height={58}
             border={false}
             text="Login"
-            onPress={() => {
-              navigation.navigate("view-bills-screen");
-            }}
+            onPress={handleAuth}
           />
           <Text
             style={{

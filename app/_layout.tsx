@@ -4,10 +4,16 @@ import { preloadImages } from "@/src/utils/preloadAssets";
 import { SplashScreen, Stack } from "expo-router";
 import React, { useEffect, useState } from "react";
 
+function RouteGuard({ children }: { children: React.ReactNode }) {
+  // Removed navigation redirect from layout — routing is handled by React Navigation
+  // Keep this component as a simple passthrough for now (reserved for UI guard)
+  return <>{children}</>;
+}
+
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useLoadFonts();
   const [assetsLoaded, setAssetsLoaded] = useState(false);
-  const [firebaseVerified, setFirebaseVerified] = useState(false);
+
   // Keep splash visible while we load fonts and images
   useEffect(() => {
     let mounted = true;
@@ -39,18 +45,22 @@ export default function RootLayout() {
   useEffect(() => {
     const verify = async () => {
       const verified = await verifyFirebase();
-      setFirebaseVerified(verified);
+      if (verified) {
+        console.log("firebase connection is up and running");
+      } else {
+        throw new Error("firebase connection failed");
+      }
     };
     verify();
   }, []);
-
-  if (!firebaseVerified) {
-    return null;
-  }
 
   if (!fontsLoaded && !fontError) {
     return null;
   }
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <RouteGuard>
+      <Stack screenOptions={{ headerShown: false }} />
+    </RouteGuard>
+  );
 }

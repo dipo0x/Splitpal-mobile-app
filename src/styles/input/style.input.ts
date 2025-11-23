@@ -15,6 +15,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: "#fff",
   },
+  logininputerror: {
+    paddingLeft: 15,
+    fontFamily: "Satoshi-Regular",
+    height: 50,
+    width: 280,
+    borderColor: "#ff6b6b",
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    backgroundColor: "#fff",
+  },
 });
 
 export default styles;

@@ -7,7 +7,7 @@ import { ColorValue, Image, Text, View } from "react-native";
 
 const buttonColors: readonly [ColorValue, ColorValue] = ["#F6F7FF", "#EAF6F6"];
 
-const ViewBillsScreen = ({ navigation }: any) => {
+const BillsScreen = ({ navigation }: any) => {
   return (
     <View style={styles.splashContainer}>
       <AppStatusBar backgroundColor={buttonColors[0] as string} />
@@ -19,19 +19,21 @@ const ViewBillsScreen = ({ navigation }: any) => {
       >
         <View>
           <Image
-            source={require("@/assets/images/view-bills-image.png")}
+            source={require("@/assets/images/artwork.png")}
             style={styles.image}
           />
         </View>
       </LinearGradient>
       <View style={styles.buttonContainer}>
-        <Text style={styles.mainText}>Bills Made Clear, Splits Made Easy</Text>
+        <Text style={styles.mainText}>
+          The Easy Way To Split Expenses With Friends
+        </Text>
         <Text style={styles.subText}>
-          Every detail of the bill is visible so your friends always know
-          exactly what they’re paying for.
+          Quickly share group expenses, keep everything fair, and avoid the
+          awkward money talk.
         </Text>
         <View style={{ width: "100%", paddingTop: 30, marginBottom: 30 }}>
-          <OnboardingProgress currentStep={2} />
+          <OnboardingProgress currentStep={1} />
         </View>
         <SplashButton
           width={130}
@@ -48,7 +50,7 @@ const ViewBillsScreen = ({ navigation }: any) => {
           border={false}
           text="Next"
           onPress={() => {
-            navigation.navigate("auth-stack", { screen: "login-screen" });
+            navigation.navigate("view-bills-screen");
           }}
         />
       </View>
@@ -56,4 +58,4 @@ const ViewBillsScreen = ({ navigation }: any) => {
   );
 };
 
-export default ViewBillsScreen;
+export default BillsScreen;
