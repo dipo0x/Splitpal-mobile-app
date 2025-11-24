@@ -2,12 +2,14 @@ import { FirebaseError } from "firebase/app";
 import {
   User,
   createUserWithEmailAndPassword,
-  getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { auth } from "./firebase.lib";
+import { clearTokens, isTokenExpired, saveTokens } from "./securestorage.lib";
 
 const db = getFirestore();
 
@@ -33,12 +35,48 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(auth.currentUser);
   const [isLoadingUser, setIsLoadingUser] = useState<boolean>(true);
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        isInitialMount.current = false;
+
+        const isExpired = await isTokenExpired();
+
+        if (isExpired) {
+          try {
+            const newIdToken = await user.getIdToken(true);
+            const tokenResult = await user.getIdTokenResult();
+
+            const expiresAt = tokenResult.expirationTime
+              ? Math.floor(
+                  new Date(tokenResult.expirationTime).getTime() / 1000
+                ) * 1000
+              : undefined;
+
+            await saveTokens(user.uid, newIdToken, "", expiresAt);
+          } catch {
+            await signOut(auth);
+            await clearTokens();
+            setUser(null);
+            setIsLoadingUser(false);
+            return;
+          }
+        }
+      } else {
+        if (!isInitialMount.current) {
+          try {
+            await clearTokens();
+          } catch (error) {
+            console.error("Error clearing tokens:", error);
+          }
+        }
+        isInitialMount.current = false;
+      }
+
       setUser(user);
       setIsLoadingUser(false);
     });
@@ -48,19 +86,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signIn = async (email: string, password: string, remember = false) => {
     try {
-      const auth = getAuth();
-      // const persistence = remember ? browserLocalPersistence : browserSessionPersistence;
-      // try {
-      //   await setPersistence(auth, persistence);
-      // } catch (e) {
-      //   console.warn("setPersistence failed", e);
-      // }
-
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
+      await clearTokens();
+
+      const idToken = await userCredential.user.getIdToken();
+      const tokenResult = await userCredential.user.getIdTokenResult();
+
+      const expiresAt = tokenResult.expirationTime
+        ? Math.floor(new Date(tokenResult.expirationTime).getTime() / 1000) *
+          1000
+        : undefined;
+
+      await saveTokens(userCredential.user.uid, idToken, "", expiresAt);
+
       setUser(userCredential.user);
       return null;
     } catch (error) {
@@ -108,7 +150,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       }
 
-      // Non-Firebase errors
       if (error instanceof Error) {
         return { message: error.message, isEmail: false };
       }
@@ -125,10 +166,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     password: string,
     fullName: string,
     username: string,
-    remember = false
   ) => {
     try {
-      const auth = getAuth();
       const providerData: { fullName: string; username: string } = {
         fullName,
         username,
@@ -146,6 +185,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         await setDoc(doc(db, "users", uid), userData);
       }
 
+      await clearTokens();
+
+      const idToken = await userCredential.user.getIdToken();
+      const tokenResult = await userCredential.user.getIdTokenResult();
+
+      const expiresAt = tokenResult.expirationTime
+        ? Math.floor(new Date(tokenResult.expirationTime).getTime() / 1000) *
+          1000
+        : undefined;
+
+      await saveTokens(userCredential.user.uid, idToken, "", expiresAt);
+      
       setUser(userCredential.user);
       return null;
     } catch (error) {

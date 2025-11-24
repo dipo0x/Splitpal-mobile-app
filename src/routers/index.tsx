@@ -1,4 +1,4 @@
-import { useAuth } from "@/src/lib/authcontext";
+import { useAuth } from "@/src/lib/authcontext.lib";
 import { RootStackParamList } from "@/src/types/types";
 import { screenOptions } from "@/src/utils/stack_options.utils";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -9,7 +9,8 @@ import WalkStack from "./splash";
 const Stack = createStackNavigator<RootStackParamList>();
 const RootRouter = () => {
   const { user } = useAuth();
-  const initialRouteName = user ? "walkthrough-stack" : "walkthrough-stack";
+  console.log("a user", user)
+  const initialRouteName = user ? "auth-stack" : "walkthrough-stack";
 
   return (
     <Stack.Navigator

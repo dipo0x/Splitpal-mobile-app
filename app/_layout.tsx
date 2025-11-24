@@ -1,12 +1,11 @@
 import { verifyFirebase } from "@/src/lib/firebase.lib";
+import { isSecureStorageAvailable } from "@/src/lib/securestorage.lib";
 import { useLoadFonts } from "@/src/utils/font.utils";
 import { preloadImages } from "@/src/utils/preloadAssets";
 import { SplashScreen, Stack } from "expo-router";
 import React, { useEffect, useState } from "react";
 
 function RouteGuard({ children }: { children: React.ReactNode }) {
-  // Removed navigation redirect from layout — routing is handled by React Navigation
-  // Keep this component as a simple passthrough for now (reserved for UI guard)
   return <>{children}</>;
 }
 
@@ -14,7 +13,6 @@ export default function RootLayout() {
   const [fontsLoaded, fontError] = useLoadFonts();
   const [assetsLoaded, setAssetsLoaded] = useState(false);
 
-  // Keep splash visible while we load fonts and images
   useEffect(() => {
     let mounted = true;
     async function prepare() {
@@ -41,6 +39,20 @@ export default function RootLayout() {
     }
     hideIfReady();
   }, [fontsLoaded, fontError, assetsLoaded]);
+
+  useEffect(() => {
+    const isWorking = async () => {
+      const working = await isSecureStorageAvailable()
+      if (working) {
+        console.log("secure storage is up and running");
+      } else {
+        throw new Error("secure storage not working");
+      }
+    };
+    isWorking();
+  }, []);
+
+
 
   useEffect(() => {
     const verify = async () => {

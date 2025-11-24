@@ -4,7 +4,7 @@ import Checkbox from "@/src/components/ui/CheckBox";
 import SocialLoginCard from "@/src/components/ui/splash/SocialLoginCard";
 import AuthWrapper from "@/src/components/wrappers/auth/AuthWrapper";
 import { EMAIL, PASSWORD, SIGN_IN } from "@/src/const/auth.const";
-import { useAuth } from "@/src/lib/authcontext";
+import { useAuth } from "@/src/lib/authcontext.lib";
 import React, { useState } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
@@ -30,9 +30,11 @@ const LoginScreen = ({ navigation }: any) => {
   const validate = () => {
     const next: LoginErrors = {};
     if (!email.trim()) next.email = "Please enter your email.";
-    else if (!/^\S+@\S+\.\S+$/.test(email)) next.email = "Please enter a valid email.";
+    else if (!/^\S+@\S+\.\S+$/.test(email))
+      next.email = "Please enter a valid email.";
     if (!password) next.password = "Please enter your password.";
-    else if (password.length < 6) next.password = "Password must be at least 6 characters.";
+    else if (password.length < 6)
+      next.password = "Password must be at least 6 characters.";
     setErrors(next);
     return Object.keys(next).length === 0;
   };

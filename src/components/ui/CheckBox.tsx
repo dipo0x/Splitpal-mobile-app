@@ -18,7 +18,7 @@ export default function CustomCheckbox({ boxStyle, checked, onChange }: Props) {
       speed: 15,
       bounciness: 8,
     }).start();
-  }, [checked]);
+  }, [checked, scale]);
 
   return (
     <View style={boxStyle}>

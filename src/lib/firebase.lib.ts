@@ -1,5 +1,12 @@
 import { env } from "@/src/config/env.config";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FirebaseApp, initializeApp } from "firebase/app";
+import {
+  Auth,
+  getAuth,
+  getReactNativePersistence,
+  initializeAuth,
+} from "firebase/auth";
 import {
   doc,
   enableNetwork,
@@ -8,7 +15,7 @@ import {
   getFirestore,
 } from "firebase/firestore";
 
-const firebaseConfig: Record<string, string> = {
+export const firebaseConfig: Record<string, string> = {
   apiKey: env.FIREBASE_API_KEY!,
   authDomain: env.FIREBASE_AUTH_DOMAIN!,
   databaseURL: env.FIREBASE_DATABASE_URL!,
@@ -19,9 +26,19 @@ const firebaseConfig: Record<string, string> = {
 };
 
 let app: FirebaseApp;
+let auth: Auth;
 
 try {
   app = initializeApp(firebaseConfig);
+
+  try {
+    auth = initializeAuth(app, {
+      persistence: getReactNativePersistence(AsyncStorage),
+    });
+  } catch {
+
+    auth = getAuth(app);
+  }
 } catch (error) {
   throw error;
 }
@@ -42,4 +59,4 @@ const verifyFirebase = async (): Promise<boolean> => {
   }
 };
 
-export { app, verifyFirebase };
+export { app, auth, verifyFirebase };

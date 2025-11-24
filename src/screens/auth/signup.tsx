@@ -9,7 +9,7 @@ import {
   SIGN_UP,
   USERNAME,
 } from "@/src/const/auth.const";
-import { useAuth } from "@/src/lib/authcontext";
+import { useAuth } from "@/src/lib/authcontext.lib";
 import React, { useState } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
@@ -61,7 +61,7 @@ export default function SignUpScreen({ navigation }: any) {
       return;
     }
 
-    navigation.navigate("auth-stack", { screen: "login-screen"});
+    navigation.navigate("auth-stack", { screen: "login-screen" });
   };
 
   return (

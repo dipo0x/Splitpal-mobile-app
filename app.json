@@ -6,12 +6,15 @@
     "orientation": "portrait",
     "icon": "./assets/images/splitpal-logo.png",
     "scheme": "splitpal",
-   
+
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
         "UIViewControllerBasedStatusBarAppearance": false
+      },
+      "config": {
+        "usesNonExemptEncryption": false
       }
     },
     "android": {
