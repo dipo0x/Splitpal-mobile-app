@@ -41,9 +41,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
+      if (isInitialMount.current && !user) {
         isInitialMount.current = false;
+        setIsLoadingUser(false);
+        return;
+      }
 
+      isInitialMount.current = false;
+
+      if (user) {
         const isExpired = await isTokenExpired();
 
         if (isExpired) {
@@ -67,14 +73,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           }
         }
       } else {
-        if (!isInitialMount.current) {
-          try {
-            await clearTokens();
-          } catch (error) {
-            console.error("Error clearing tokens:", error);
-          }
+        try {
+          await clearTokens();
+        } catch (error) {
+          console.error("Error clearing tokens:", error);
         }
-        isInitialMount.current = false;
       }
 
       setUser(user);
@@ -165,7 +168,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     email: string,
     password: string,
     fullName: string,
-    username: string,
+    username: string
   ) => {
     try {
       const providerData: { fullName: string; username: string } = {
@@ -196,7 +199,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         : undefined;
 
       await saveTokens(userCredential.user.uid, idToken, "", expiresAt);
-      
+
       setUser(userCredential.user);
       return null;
     } catch (error) {

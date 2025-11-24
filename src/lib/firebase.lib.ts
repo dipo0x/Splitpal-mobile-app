@@ -36,7 +36,6 @@ try {
       persistence: getReactNativePersistence(AsyncStorage),
     });
   } catch {
-
     auth = getAuth(app);
   }
 } catch (error) {
