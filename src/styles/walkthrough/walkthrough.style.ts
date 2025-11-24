@@ -5,9 +5,6 @@ export const colors = {
   background: "#ffffffff",
   white: "#FFF",
   grayText: "#5F6368CC",
-  lightGray: "#AAA",
-  pinkLink: "#FF69B4",
-  divider: "#555",
   outlineColor: "#4C4C4C",
   placeHolderColor: "#7D7D7D",
   errorMessage: "#FF0000",
@@ -18,6 +15,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     flex: 1,
   },
+
   gradient: {
     flex: 1.2,
   },

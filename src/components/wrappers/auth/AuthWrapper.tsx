@@ -2,7 +2,7 @@ import React from "react";
 import { ColorValue, DimensionValue, View, ViewProps } from "react-native";
 
 import AppStatusBar from "@/src/layout/appStatusBar";
-import styles from "@/src/styles/walkthrough/style.walkthrough";
+import styles from "@/src/styles/walkthrough/walkthrough.style";
 import { LinearGradient } from "expo-linear-gradient";
 
 const gradientColors: readonly [ColorValue, ColorValue] = [

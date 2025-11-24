@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import AuthStack from "./auth";
 import WalkStack from "./splash";
+import DashboardStack from "./dashboard";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -15,6 +16,7 @@ const RootRouter = () => {
     >
       <Stack.Screen name="walkthrough-stack" component={WalkStack} />
       <Stack.Screen name="auth-stack" component={AuthStack} />
+      <Stack.Screen name="dashboard-stack" component={DashboardStack} />
     </Stack.Navigator>
   );
 };

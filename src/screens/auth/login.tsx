@@ -16,7 +16,6 @@ const LoginScreen = ({ navigation }: any) => {
   type LoginErrors = {
     email?: string | null;
     password?: string | null;
-    general?: string | null;
   };
 
   const [errors, setErrors] = useState<LoginErrors>({});
@@ -49,8 +48,8 @@ const LoginScreen = ({ navigation }: any) => {
       else setFieldError("password", result.message);
       return;
     }
+    navigation.navigate("dashboard-stack", { screen: "home-screen" });
 
-    // On success the auth state updates and router should handle navigation.
   };
 
   return (

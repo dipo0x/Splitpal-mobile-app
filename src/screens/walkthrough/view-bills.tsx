@@ -1,7 +1,7 @@
 import SplashButton from "@/src/components/buttons/splash/button";
 import OnboardingProgress from "@/src/components/ui/splash/OnboardingProgress";
 import AppStatusBar from "@/src/layout/appStatusBar";
-import styles from "@/src/styles/walkthrough/style.walkthrough";
+import styles from "@/src/styles/walkthrough/walkthrough.style";
 import { LinearGradient } from "expo-linear-gradient";
 import { ColorValue, Image, Text, View } from "react-native";
 

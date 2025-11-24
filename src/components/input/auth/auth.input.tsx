@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TextInput, View } from "react-native";
-import styles from "../../../styles/input/style.input";
+import styles from "../../../styles/input/input.style";
 
 const AuthInput = (props: any) => {
   const {

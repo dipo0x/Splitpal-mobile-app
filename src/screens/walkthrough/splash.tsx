@@ -33,7 +33,7 @@ const SplashScreen = ({ navigation }: SplashScreenProps) => {
         navigation.getParent()?.dispatch(
           CommonActions.reset({
             index: 0,
-            routes: [{ name: "auth-stack" }],
+            routes: [{ name: "dashboard-stack" }],
           })
         );
       } else {
