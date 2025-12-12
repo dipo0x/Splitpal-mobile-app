@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 });
 
 const SplashScreen = ({ navigation }: SplashScreenProps) => {
-  const { user, isLoadingUser } = useAuth();
+  const { user, appUser, isLoadingUser } = useAuth();
 
   useEffect(() => {
     if (isLoadingUser) {
@@ -29,7 +29,7 @@ const SplashScreen = ({ navigation }: SplashScreenProps) => {
     }
 
     const timer = setTimeout(() => {
-      if (user) {
+      if (user && appUser) {
         navigation.getParent()?.dispatch(
           CommonActions.reset({
             index: 0,
@@ -42,7 +42,7 @@ const SplashScreen = ({ navigation }: SplashScreenProps) => {
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, [user, isLoadingUser, navigation]);
+  }, [user, appUser, isLoadingUser, navigation]);
 
   return (
     <SafeAreaProvider>

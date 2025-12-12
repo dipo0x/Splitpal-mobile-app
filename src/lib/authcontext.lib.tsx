@@ -10,6 +10,7 @@ import { doc, getFirestore, setDoc } from "firebase/firestore";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { auth } from "./firebase.lib";
 import { clearTokens, isTokenExpired, saveTokens } from "./securestorage.lib";
+import { AppUser, getUser } from "./user.lib";
 
 const db = getFirestore();
 
@@ -17,6 +18,7 @@ type AuthResult = { message: string; isEmail: boolean };
 
 type AuthContextType = {
   user: User | null;
+  appUser: AppUser | null;
   isLoadingUser?: boolean;
   signIn: (
     email: string,
@@ -27,7 +29,6 @@ type AuthContextType = {
     email: string,
     password: string,
     fullName: string,
-
     username: string
   ) => Promise<AuthResult | null>;
 };
@@ -36,9 +37,9 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(auth.currentUser);
+  const [appUser, setAppUser] = useState<AppUser | null>(null);
   const [isLoadingUser, setIsLoadingUser] = useState<boolean>(true);
   const isInitialMount = useRef(true);
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (isInitialMount.current && !user) {
@@ -68,6 +69,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             await signOut(auth);
             await clearTokens();
             setUser(null);
+            setAppUser(null);
             setIsLoadingUser(false);
             return;
           }
@@ -80,6 +82,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       }
 
+      const combinedUser = await getUser();
+      setAppUser(combinedUser);
       setUser(user);
       setIsLoadingUser(false);
     });
@@ -171,10 +175,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     username: string
   ) => {
     try {
-      const providerData: { fullName: string; username: string } = {
-        fullName,
-        username,
-      };
+    
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -183,9 +184,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       const user = userCredential.user;
       if (user) {
-        const uid = user.uid;
+        const userId = user.uid;
+        const providerData: { fullName: string; username: string, userId: string} = {
+          fullName,
+          username,
+          userId
+        };
+
+      
         const userData = providerData;
-        await setDoc(doc(db, "users", uid), userData);
+        await setDoc(doc(db, "users", userId), userData);
       }
 
       await clearTokens();
@@ -264,7 +272,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoadingUser, signIn, signUp }}>
+    <AuthContext.Provider
+      value={{ user, appUser, isLoadingUser, signIn, signUp }}
+    >
       {children}
     </AuthContext.Provider>
   );

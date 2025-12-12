@@ -13,13 +13,34 @@ export const colors = {
 const styles = StyleSheet.create({
   header: {
     backgroundColor: colors.primary,
-    flex: 1,
+    flexDirection: "column",
+    paddingTop: 15,
+    paddingHorizontal: 30,
   },
   dashboardContainer: {
     flex: 1,
-    backgroundColor: colors.primary
+    backgroundColor: colors.primary,
   },
-
+  avatar: {
+    marginTop: 15,
+  },
+  headerText: {
+    paddingTop: 15,
+    alignContent: "center",
+    marginLeft: 10,
+    letterSpacing: 0.1,
+    fontFamily: "Satoshi-Medium",
+  },
+  caroselsIcon: {
+    marginTop: 20,
+    marginLeft: 15,
+  },
+  carouselText: {
+    color: "black",
+    marginTop: 23,
+    fontFamily: "Satoshi-Medium",
+  },
+ 
 });
 
 export default styles;
