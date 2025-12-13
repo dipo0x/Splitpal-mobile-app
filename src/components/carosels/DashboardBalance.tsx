@@ -1,8 +1,8 @@
-import {
-  default as BillsSettledAvatar,
-  default as PendingBillsAvatar,
-} from "@/assets/images/dashboard/iconsax-clipboard-tick.svg";
+import BillsSettledAvatar from "@/assets/images/dashboard/iconsax-clipboard-tick.svg";
 import LockIndicator from "@/assets/images/dashboard/Lock-indicator.svg";
+
+import PendingBillsAvatar from "@/assets/images/dashboard/Clip-path-group-3.svg";
+
 import styles from "@/src/styles/dashboard/home.style";
 import React, { FunctionComponent } from "react";
 import { Text, View } from "react-native";

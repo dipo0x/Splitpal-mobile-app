@@ -1,6 +1,6 @@
 import { verifyFirebase } from "@/src/lib/firebase.lib";
 import { isSecureStorageAvailable } from "@/src/lib/securestorage.lib";
-import { useLoadFonts } from "@/src/utils/font.utils";
+import { useLoadFonts } from "@/src/utils/font.util";
 import { preloadImages } from "@/src/utils/preloadAssets";
 import { SplashScreen, Stack } from "expo-router";
 import React, { useEffect, useState } from "react";

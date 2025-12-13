@@ -1,9 +1,11 @@
 import UserAvatar from "@/assets/images/dashboard/avatar.svg";
 import WalletAvatar from "@/assets/images/dashboard/Clip-path-group.svg";
 import MastercardAvatar from "@/assets/images/dashboard/Mastercard.svg";
-import DashboardBalanceCarousel from "@/src/components/carosels/DashboardBalance";
+import BillCard from "@/src/components/cards/dashboard/bills";
+import DashboardBalanceCarousel from "@/src/components/carosels/dashboardBalance";
 import AppStatusBar from "@/src/layout/appStatusBar";
 import { useAuth } from "@/src/lib/authcontext.lib";
+import userBills from "@/src/mocks/bill.mock";
 import styles from "@/src/styles/dashboard/home.style";
 import React, { useState } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
@@ -74,8 +76,7 @@ const HomeScreen = ({ navigation }: any) => {
           alignSelf: "center",
         }}
       />
-
-      <View>
+      <ScrollView style={{ paddingVertical: 10 }}>
         <Text
           style={{
             paddingTop: 10,
@@ -84,7 +85,7 @@ const HomeScreen = ({ navigation }: any) => {
             fontSize: 20,
           }}
         >
-          Your money moves 💰
+          Your Money Moves 💰
         </Text>
         <ScrollView
           horizontal={true}
@@ -161,7 +162,48 @@ const HomeScreen = ({ navigation }: any) => {
             <DashboardBalanceCarousel type="pending" amount={pendingBills} />
           </View>
         </ScrollView>
-      </View>
+        <View
+          style={{
+            paddingTop: 20,
+            flexDirection: "row",
+            paddingLeft: 25,
+          }}
+        >
+          <Text
+            style={{
+              fontFamily: "Satoshi-Medium",
+              fontSize: 20,
+            }}
+          >
+            Recent Splits
+          </Text>
+          <Text
+            style={{
+              paddingTop: 5,
+              color: "rgba(123, 97, 255, 1)",
+              fontFamily: "Satoshi-Bold",
+              fontSize: 15,
+              paddingRight: 25,
+              marginLeft: "auto",
+            }}
+          >
+            See All
+          </Text>
+        </View>
+        <View
+          style={{
+            paddingTop: 25,
+            paddingLeft: 25,
+            paddingRight: 25,
+            flexDirection: "column",
+            gap: 10,
+          }}
+        >
+          {userBills.map((bill, index) => (
+            <BillCard key={index} {...bill} />
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 };

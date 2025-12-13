@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   carouselText: {
+    paddingLeft: 5,
     color: "black",
     marginTop: 23,
     fontFamily: "Satoshi-Medium",
