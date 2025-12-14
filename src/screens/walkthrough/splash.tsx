@@ -1,4 +1,4 @@
-import AppStatusBar from "@/src/layout/appStatusBar";
+import AppStatusBar from "@/src/layout/AppStatusBar";
 import { useAuth } from "@/src/lib/authcontext.lib";
 import { SplashScreenProps } from "@/src/types/types";
 import { CommonActions } from "@react-navigation/native";

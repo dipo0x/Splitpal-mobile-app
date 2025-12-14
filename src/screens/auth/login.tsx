@@ -1,4 +1,4 @@
-import SplashButton from "@/src/components/buttons/splash/button";
+import SplashButton from "@/src/components/buttons/splash/Button";
 import AuthInput from "@/src/components/input/auth/auth.input";
 import Checkbox from "@/src/components/ui/CheckBox";
 import SocialLoginCard from "@/src/components/ui/splash/SocialLoginCard";
@@ -49,7 +49,6 @@ const LoginScreen = ({ navigation }: any) => {
       return;
     }
     navigation.navigate("dashboard-stack", { screen: "home-screen" });
-
   };
 
   return (

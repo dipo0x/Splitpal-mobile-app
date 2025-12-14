@@ -2,10 +2,11 @@ import UserAvatar from "@/assets/images/dashboard/avatar.svg";
 import WalletAvatar from "@/assets/images/dashboard/Clip-path-group.svg";
 import MastercardAvatar from "@/assets/images/dashboard/Mastercard.svg";
 import BillCard from "@/src/components/cards/dashboard/bills";
-import DashboardBalanceCarousel from "@/src/components/carosels/dashboardBalance";
-import AppStatusBar from "@/src/layout/appStatusBar";
+import DashboardBalanceCarousel from "@/src/components/carosels/DashboardBalance";
+import AppStatusBar from "@/src/layout/AppStatusBar";
 import { useAuth } from "@/src/lib/authcontext.lib";
 import userBills from "@/src/mocks/bill.mock";
+import { BottomNav } from "@/src/navigation/BottomTab";
 import styles from "@/src/styles/dashboard/home.style";
 import React, { useState } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
@@ -204,6 +205,7 @@ const HomeScreen = ({ navigation }: any) => {
           ))}
         </View>
       </ScrollView>
+      <BottomNav />
     </View>
   );
 };

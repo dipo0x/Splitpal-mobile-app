@@ -1,7 +1,7 @@
 import React from "react";
 import { ColorValue, DimensionValue, View, ViewProps } from "react-native";
 
-import AppStatusBar from "@/src/layout/appStatusBar";
+import AppStatusBar from "@/src/layout/AppStatusBar";
 import styles from "@/src/styles/walkthrough/walkthrough.style";
 import { LinearGradient } from "expo-linear-gradient";
 

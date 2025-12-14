@@ -1,4 +1,4 @@
-import SplashButton from "@/src/components/buttons/splash/button";
+import SplashButton from "@/src/components/buttons/splash/Button";
 import AuthInput from "@/src/components/input/auth/auth.input";
 import SocialLoginCard from "@/src/components/ui/splash/SocialLoginCard";
 import AuthWrapper from "@/src/components/wrappers/auth/AuthWrapper";
