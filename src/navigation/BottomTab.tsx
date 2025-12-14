@@ -1,13 +1,13 @@
+import NavIcon from "@/src/components/icons/NavIcon";
 import React from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
   Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
-import NavIcon from "@/src/components/icons/NavIcon";
 
 const PURPLE = "rgba(123, 97, 255, 1)";
 const GRAY = "rgba(95, 99, 104, 1)";
@@ -41,20 +41,13 @@ type NavItemProps = {
 function NavItem({ iconName, label, active }: NavItemProps) {
   return (
     <TouchableOpacity style={styles.item}>
-      <NavIcon 
+      <NavIcon
         name={iconName}
-        width={24} 
-        height={24} 
+        width={24}
+        height={24}
         stroke={active ? PURPLE : GRAY}
       />
-      <Text
-        style={[
-          styles.label,
-          active && styles.activeLabel,
-        ]}
-      >
-        {label}
-      </Text>
+      <Text style={[styles.label, active && styles.activeLabel]}>{label}</Text>
     </TouchableOpacity>
   );
 }
@@ -68,7 +61,6 @@ const styles = StyleSheet.create({
   },
 
   container: {
-
     height: 90,
     backgroundColor: "#fff",
     borderRadius: 36,

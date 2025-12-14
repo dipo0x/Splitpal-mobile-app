@@ -40,8 +40,8 @@ const HomeScreen = ({ navigation }: any) => {
               <Image
                 source={require("@/assets/images/notification.png")}
                 style={{
-                  width: 30,
-                  height: 30,
+                  width: 25,
+                  height: 27,
                 }}
               />
               <View
@@ -70,18 +70,24 @@ const HomeScreen = ({ navigation }: any) => {
       <View
         style={{
           paddingTop: 5,
-          borderBottomColor: "rgba(242, 244, 245, 1)",
+
+          borderColor: "rgba(242, 244, 245, 1)",
           borderBottomWidth: 1,
           width: "100%",
-          marginVertical: 10,
+          marginTop: 10,
+          marginBottom: 0,
           alignSelf: "center",
         }}
       />
-      <ScrollView style={{ paddingVertical: 10 }}>
+      <ScrollView 
+        style={{ paddingVertical: 10, paddingTop: 0 }}
+        contentContainerStyle={{ paddingBottom: 100 }}
+        showsVerticalScrollIndicator={false}
+      >
         <Text
           style={{
-            paddingTop: 10,
             paddingLeft: 20,
+            paddingTop: 15,
             fontFamily: "Satoshi-Medium",
             fontSize: 20,
           }}
