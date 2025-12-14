@@ -70,7 +70,6 @@ const HomeScreen = ({ navigation }: any) => {
       <View
         style={{
           paddingTop: 5,
-
           borderColor: "rgba(242, 244, 245, 1)",
           borderBottomWidth: 1,
           width: "100%",
@@ -79,9 +78,9 @@ const HomeScreen = ({ navigation }: any) => {
           alignSelf: "center",
         }}
       />
-      <ScrollView 
+      <ScrollView
         style={{ paddingVertical: 10, paddingTop: 0 }}
-        contentContainerStyle={{ paddingBottom: 100 }}
+        contentContainerStyle={{ paddingBottom: 93 }}
         showsVerticalScrollIndicator={false}
       >
         <Text

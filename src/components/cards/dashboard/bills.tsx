@@ -1,6 +1,5 @@
 import FoodAvatar from "@/assets/images/dashboard/food.svg";
 import TravelsAvatar from "@/assets/images/dashboard/ride.svg";
-import CheckAvatar from "@/assets/images/dashboard/material-symbols_check.svg"
 import AvatarStack from "@/src/components/ui/AvatarStack";
 import styles from "@/src/styles/dashboard/home.style";
 import { IBill } from "@/src/types/bills/bill.type";
@@ -64,7 +63,7 @@ const BillCard: React.FC<IBill> = (bill) => {
         >
           {bill.name}
         </Text>
-     
+
         <View
           style={{
             top: 7,

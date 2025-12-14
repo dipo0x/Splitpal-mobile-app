@@ -5,7 +5,7 @@ const data: IBill[] = [
     amount: 20000,
     name: "Bolt ride",
     description: "Ride from NYSC Camp to NCAIR",
-    dueDate: "2025-12-13T14:02:29.312Z" ,
+    dueDate: "2025-12-13T14:02:29.312Z",
     category: "transport",
     paymentStatus: "pending",
     members: [
@@ -27,7 +27,7 @@ const data: IBill[] = [
     amount: 50000,
     name: "Chicken Republic",
     description: "Bought food and drinks",
-    dueDate: "2025-12-13T14:02:29.312Z" ,
+    dueDate: "2025-12-13T14:02:29.312Z",
     category: "food",
     paymentStatus: "settled",
     members: [

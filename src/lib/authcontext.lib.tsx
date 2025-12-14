@@ -175,7 +175,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     username: string
   ) => {
     try {
-    
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -185,13 +184,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const user = userCredential.user;
       if (user) {
         const userId = user.uid;
-        const providerData: { fullName: string; username: string, userId: string} = {
+        const providerData: {
+          fullName: string;
+          username: string;
+          userId: string;
+        } = {
           fullName,
           username,
-          userId
+          userId,
         };
 
-      
         const userData = providerData;
         await setDoc(doc(db, "users", userId), userData);
       }

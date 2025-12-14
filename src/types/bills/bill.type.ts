@@ -22,5 +22,5 @@ export interface IBill {
   dueDate: string;
   category: category;
   paymentStatus: paymentStatus;
-  members: members[]
+  members: members[];
 }

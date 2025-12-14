@@ -10,7 +10,7 @@ const AuthStack = () => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen name="login-screen" component={LoginScreen} />
-       <Stack.Screen name="signup-screen" component={SignUpScreen} />
+      <Stack.Screen name="signup-screen" component={SignUpScreen} />
     </Stack.Navigator>
   );
 };

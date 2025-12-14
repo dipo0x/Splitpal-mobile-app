@@ -28,7 +28,6 @@ export async function getUser(): Promise<AppUser | null> {
     const userDocSnap = await getDoc(userDocRef);
 
     if (!userDocSnap.exists()) {
-   
       return firebaseUser as AppUser;
     }
 

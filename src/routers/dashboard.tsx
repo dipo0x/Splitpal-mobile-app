@@ -4,7 +4,6 @@ import { screenOptions } from "@/src/utils/stack_options.utils";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 
-
 const Stack = createStackNavigator<DashboardStackParamList>();
 const DashboardStack = () => {
   return (

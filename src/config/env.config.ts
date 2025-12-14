@@ -1,5 +1,5 @@
-import { z } from "zod";
 import Constants from "expo-constants";
+import { z } from "zod";
 
 const envSchema = z.object({
   FIREBASE_API_KEY: z.string().min(1),

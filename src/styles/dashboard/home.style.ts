@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     marginTop: 23,
     fontFamily: "Satoshi-Medium",
   },
- 
 });
 
 export default styles;

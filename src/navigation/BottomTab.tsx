@@ -1,4 +1,4 @@
-import NavIcon from "@/src/components/icons/NavIcon";
+import NavIcon from "@/src/components/icons/NavBarIcon";
 import React from "react";
 import {
   Platform,

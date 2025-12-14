@@ -3,8 +3,8 @@ import { screenOptions } from "@/src/utils/stack_options.utils";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import AuthStack from "./auth";
-import WalkStack from "./splash";
 import DashboardStack from "./dashboard";
+import WalkStack from "./splash";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
