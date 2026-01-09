@@ -1,5 +1,5 @@
+import { useAuth } from "@/src/hooks/useAuth";
 import AppStatusBar from "@/src/layout/AppStatusBar";
-import { useAuth } from "@/src/lib/authcontext.lib";
 import { SplashScreenProps } from "@/src/types/types";
 import { CommonActions } from "@react-navigation/native";
 import React, { useEffect } from "react";

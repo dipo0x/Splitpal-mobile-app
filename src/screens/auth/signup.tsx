@@ -9,7 +9,7 @@ import {
   SIGN_UP,
   USERNAME,
 } from "@/src/const/auth.const";
-import { useAuth } from "@/src/lib/authcontext.lib";
+import { useAuth } from "@/src/hooks/useAuth";
 import React, { useState } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 

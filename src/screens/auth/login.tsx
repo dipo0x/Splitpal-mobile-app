@@ -4,7 +4,7 @@ import Checkbox from "@/src/components/ui/CheckBox";
 import SocialLoginCard from "@/src/components/ui/splash/SocialLoginCard";
 import AuthWrapper from "@/src/components/wrappers/auth/AuthWrapper";
 import { EMAIL, PASSWORD, SIGN_IN } from "@/src/const/auth.const";
-import { useAuth } from "@/src/lib/authcontext.lib";
+import { useAuth } from "@/src/hooks/useAuth";
 import React, { useState } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 

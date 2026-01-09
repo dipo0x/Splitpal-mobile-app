@@ -15,6 +15,7 @@ export type RootStackParamList = {
   "walkthrough-stack": undefined;
   "auth-stack": undefined;
   "dashboard-stack": undefined;
+  "bills-stack": undefined;
 };
 
 export type AuthStackParamList = {
@@ -24,4 +25,8 @@ export type AuthStackParamList = {
 
 export type DashboardStackParamList = {
   "home-screen": undefined;
+};
+
+export type BillsStackParamList = {
+  "all-bills-screen": undefined;
 };

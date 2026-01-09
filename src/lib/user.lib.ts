@@ -1,4 +1,3 @@
-import { User } from "firebase/auth";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { auth } from "./firebase.lib";
 
@@ -11,9 +10,20 @@ export interface FirestoreUserData {
   updatedAt?: string;
 }
 
-export interface AppUser extends User {
+export interface AppUser {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  emailVerified: boolean;
+  phoneNumber: string | null;
+  photoURL: string | null;
   fullName?: string;
   username?: string;
+  isAnonymous: boolean;
+  metadata: {
+    creationTime?: string;
+    lastSignInTime?: string;
+  };
 }
 
 export async function getUser(): Promise<AppUser | null> {
@@ -27,23 +37,31 @@ export async function getUser(): Promise<AppUser | null> {
     const userDocRef = doc(db, "users", firebaseUser.uid);
     const userDocSnap = await getDoc(userDocRef);
 
-    if (!userDocSnap.exists()) {
-      return firebaseUser as AppUser;
-    }
+    const firestoreData = userDocSnap.exists()
+      ? (userDocSnap.data() as FirestoreUserData)
+      : null;
 
-    const firestoreData = userDocSnap.data() as FirestoreUserData;
-
+    // Create a serializable user object
     const appUser: AppUser = {
-      ...firebaseUser,
-      fullName: firestoreData.fullName,
-      username: firestoreData.username,
+      uid: firebaseUser.uid,
+      email: firebaseUser.email,
+      displayName: firebaseUser.displayName,
+      emailVerified: firebaseUser.emailVerified,
+      phoneNumber: firebaseUser.phoneNumber,
+      photoURL: firebaseUser.photoURL,
+      isAnonymous: firebaseUser.isAnonymous,
+      metadata: {
+        creationTime: firebaseUser.metadata.creationTime,
+        lastSignInTime: firebaseUser.metadata.lastSignInTime,
+      },
+      fullName: firestoreData?.fullName,
+      username: firestoreData?.username,
     };
 
     return appUser;
   } catch (error) {
     console.error("error fetching user data:", error);
-
-    return auth.currentUser as AppUser | null;
+    return null;
   }
 }
 

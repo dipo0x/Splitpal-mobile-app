@@ -1,19 +1,21 @@
-import UserAvatar from "@/assets/images/dashboard/avatar.svg";
+
 import WalletAvatar from "@/assets/images/dashboard/Clip-path-group.svg";
 import MastercardAvatar from "@/assets/images/dashboard/Mastercard.svg";
 import BillCard from "@/src/components/cards/dashboard/bills";
 import DashboardBalanceCarousel from "@/src/components/carosels/DashboardBalance";
+import HeaderComponent from "@/src/components/headers/home";
+// import { useAuth } from "@/src/hooks/useAuth";
 import AppStatusBar from "@/src/layout/AppStatusBar";
-import { useAuth } from "@/src/lib/authcontext.lib";
 import userBills from "@/src/mocks/bill.mock";
 import { BottomNav } from "@/src/navigation/BottomTab";
 import styles from "@/src/styles/dashboard/home.style";
-import React, { useState } from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+// import React, { useState } from "react";
+import React from "react";
+import {  ScrollView, Text, View } from "react-native";
 
 const HomeScreen = ({ navigation }: any) => {
-  const { appUser } = useAuth();
-  const [notificationCount, setNotificationCount] = useState(1);
+  // const { appUser } = useAuth();
+  // const [notificationCount] = useState(1);
   const walletBalance = "50,000";
   const cardLastFourDigit = "* 5623";
   const billsSettled = "15,000";
@@ -24,60 +26,8 @@ const HomeScreen = ({ navigation }: any) => {
         backgroundColor={styles.dashboardContainer.backgroundColor}
       />
 
-      <View style={styles.header}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <UserAvatar style={styles.avatar} width={55} height={55} />
-          <Text style={styles.headerText}>Hey, {appUser?.fullName} 👋</Text>
-          <View
-            style={{
-              paddingTop: 15,
-              marginLeft: "auto",
-              marginRight: 5,
-              position: "relative",
-            }}
-          >
-            <View>
-              <Image
-                source={require("@/assets/images/notification.png")}
-                style={{
-                  width: 25,
-                  height: 27,
-                }}
-              />
-              <View
-                style={{
-                  position: "absolute",
-                  top: -5,
-                  right: -3,
-                  backgroundColor: "rgba(20, 125, 128, 1)",
-                  width: 19,
-                  height: 19,
-                  borderRadius: 9,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text
-                  style={{ textAlign: "center", color: "white", fontSize: 10 }}
-                >
-                  {notificationCount}
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View
-        style={{
-          paddingTop: 5,
-          borderColor: "rgba(242, 244, 245, 1)",
-          borderBottomWidth: 1,
-          width: "100%",
-          marginTop: 10,
-          marginBottom: 0,
-          alignSelf: "center",
-        }}
-      />
+  <HeaderComponent navigation={navigation} />
+    
       <ScrollView
         style={{ paddingVertical: 10, paddingTop: 0 }}
         contentContainerStyle={{ paddingBottom: 93 }}
@@ -210,7 +160,7 @@ const HomeScreen = ({ navigation }: any) => {
           ))}
         </View>
       </ScrollView>
-      <BottomNav />
+      <BottomNav navigation={navigation} activeTab="home" />
     </View>
   );
 };

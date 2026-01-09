@@ -8,7 +8,9 @@ import React from "react";
 const Stack = createStackNavigator<AuthStackParamList>();
 const AuthStack = () => {
   return (
-    <Stack.Navigator screenOptions={screenOptions}>
+    <Stack.Navigator
+      screenOptions={(props) => screenOptions as any}
+    >
       <Stack.Screen name="login-screen" component={LoginScreen} />
       <Stack.Screen name="signup-screen" component={SignUpScreen} />
     </Stack.Navigator>

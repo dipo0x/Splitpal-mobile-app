@@ -1,5 +1,6 @@
 import NavIcon from "@/src/components/icons/NavBarIcon";
-import React from "react";
+import { AddBillModal } from "@/src/components/modals/AddBillModal";
+import React, { useState } from "react";
 import {
   Platform,
   StyleSheet,
@@ -9,38 +10,112 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 
+type ActiveTab = "home" | "bills" | "wallet" | "account";
+
 const PURPLE = "rgba(123, 97, 255, 1)";
 const GRAY = "rgba(95, 99, 104, 1)";
 
-export function BottomNav() {
+export function BottomNav({
+  navigation,
+  activeTab,
+}: {
+  navigation: any;
+  activeTab: ActiveTab;
+}) {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleScanBill = () => {
+    setIsModalVisible(false);
+
+    console.log("Scan bill pressed");
+  };
+
+  const handleAddManually = () => {
+    setIsModalVisible(false);
+
+    console.log("Add manually pressed");
+  };
+
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.container}>
-        <NavItem iconName="home" label="Home" active />
-        <NavItem iconName="bills" label="Bills" />
+    <>
+      <View style={styles.wrapper}>
+        <View style={styles.container}>
+          <NavItem
+            iconName="home"
+            route="dashboard-stack"
+            label="Home"
+            navigation={navigation}
+            active={activeTab === "home"}
+          />
+          <NavItem
+            iconName="bills"
+            route="bills-stack"
+            subRoute="all-bills-screen"
+            label="Bills"
+            navigation={navigation}
+            active={activeTab === "bills"}
+          />
+          <View style={styles.fabWrapper}>
+            <TouchableOpacity
+              style={styles.fab}
+              onPress={() => setIsModalVisible(true)}
+            >
+              <Icon name="plus" size={28} color="#fff" />
+            </TouchableOpacity>
+          </View>
 
-        <View style={styles.fabWrapper}>
-          <TouchableOpacity style={styles.fab}>
-            <Icon name="plus" size={28} color="#fff" />
-          </TouchableOpacity>
+          <NavItem
+            iconName="wallet"
+            route="login-screen"
+            label="Wallet"
+            navigation={navigation}
+            active={activeTab === "wallet"}
+          />
+
+          <NavItem
+            iconName="account"
+            route="login-screen"
+            label="Account"
+            navigation={navigation}
+            active={activeTab === "account"}
+          />
         </View>
-
-        <NavItem iconName="wallet" label="Wallet" />
-        <NavItem iconName="account" label="Account" />
       </View>
-    </View>
+
+      <AddBillModal
+        visible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        onScanBill={handleScanBill}
+        onAddManually={handleAddManually}
+      />
+    </>
   );
 }
 
 type NavItemProps = {
   iconName: "home" | "bills" | "wallet" | "account";
+  route: string;
   label: string;
+  navigation: any;
   active?: boolean;
+  subRoute?: string;
 };
 
-function NavItem({ iconName, label, active }: NavItemProps) {
+function NavItem({
+  iconName,
+  route,
+  label,
+  navigation,
+  active,
+  subRoute,
+}: NavItemProps) {
   return (
-    <TouchableOpacity style={styles.item}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => {
+        navigation.navigate(route, subRoute ? { screen: subRoute } : undefined);
+      }}
+    >
       <NavIcon
         name={iconName}
         width={24}

@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export const colors = {
-  primary: "rgba(255, 255, 255, 1)",
+  primary: "rgba(123, 97, 255, 1)",
   background: "#ffffffff",
   white: "#FFF",
   grayText: "#5F6368CC",
@@ -12,14 +12,14 @@ export const colors = {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.white,
     flexDirection: "column",
     paddingTop: 15,
     paddingHorizontal: 30,
   },
   dashboardContainer: {
     flex: 1,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.white,
   },
   avatar: {
     marginTop: 15,
