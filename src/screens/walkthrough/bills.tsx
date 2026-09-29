@@ -3,11 +3,13 @@ import OnboardingProgress from "@/src/components/ui/splash/OnboardingProgress";
 import AppStatusBar from "@/src/layout/AppStatusBar";
 import styles from "@/src/styles/walkthrough/walkthrough.style";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
 import { ColorValue, Image, Text, View } from "react-native";
 
 const buttonColors: readonly [ColorValue, ColorValue] = ["#F6F7FF", "#EAF6F6"];
 
-const BillsScreen = ({ navigation }: any) => {
+const BillsScreen = () => {
+  const router = useRouter();
   return (
     <View style={styles.splashContainer}>
       <AppStatusBar backgroundColor={buttonColors[0] as string} />
@@ -41,7 +43,7 @@ const BillsScreen = ({ navigation }: any) => {
           border={true}
           text="Skip"
           onPress={() => {
-            navigation.navigate("auth-stack", { screen: "login-screen" });
+            router.push("/auth/login");
           }}
         />
         <SplashButton
@@ -50,7 +52,7 @@ const BillsScreen = ({ navigation }: any) => {
           border={false}
           text="Next"
           onPress={() => {
-            navigation.navigate("view-bills-screen");
+            router.push("/walkthrough/view-bills");
           }}
         />
       </View>

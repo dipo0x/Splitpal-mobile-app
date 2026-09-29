@@ -1,7 +1,6 @@
 import { useAuth } from "@/src/hooks/useAuth";
 import AppStatusBar from "@/src/layout/AppStatusBar";
-import { SplashScreenProps } from "@/src/types/types";
-import { CommonActions } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -20,8 +19,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const SplashScreen = ({ navigation }: SplashScreenProps) => {
+const SplashScreen = () => {
   const { user, appUser, isLoadingUser } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     if (isLoadingUser) {
@@ -30,19 +30,14 @@ const SplashScreen = ({ navigation }: SplashScreenProps) => {
 
     const timer = setTimeout(() => {
       if (user && appUser) {
-        navigation.getParent()?.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{ name: "dashboard-stack" }],
-          })
-        );
+        router.replace("/dashboard");
       } else {
-        navigation.replace("bills-screen");
+        router.replace("/walkthrough/bills");
       }
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, [user, appUser, isLoadingUser, navigation]);
+  }, [user, appUser, isLoadingUser, router]);
 
   return (
     <SafeAreaProvider>

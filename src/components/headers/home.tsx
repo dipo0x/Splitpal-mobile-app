@@ -5,7 +5,7 @@ import styles from "@/src/styles/dashboard/home.style";
 import React, { useState } from "react";
 import { Image, Text, View } from "react-native";
 
-const HeaderComponent = ({ navigation }: any) => {
+const HeaderComponent = () => {
   const { appUser } = useAuth();
   const [notificationCount] = useState(1);
   return (

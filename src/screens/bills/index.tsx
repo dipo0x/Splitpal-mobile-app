@@ -9,7 +9,7 @@ import { ScrollView, View } from "react-native";
 
 import { ActiveTab, BillHeader } from "@/src/components/headers/bills";
 
-const BillScreen = ({ navigation }: any) => {
+const BillScreen = () => {
   const [activeTab, setActiveTab] = useState<ActiveTab>("bills");
   useAuth();
 
@@ -19,7 +19,7 @@ const BillScreen = ({ navigation }: any) => {
         backgroundColor={styles.dashboardContainer.backgroundColor}
       />
 
-      <HeaderComponent navigation={navigation} />
+      <HeaderComponent />
 
       <ScrollView
         style={{ paddingVertical: 10, paddingTop: 0 }}
@@ -28,7 +28,7 @@ const BillScreen = ({ navigation }: any) => {
       >
         {/* <BillHeader activeTab={activeTab} onTabPress={setActiveTab} /> */}
       </ScrollView>
-      <BottomNav navigation={navigation} activeTab="bills" />
+      <BottomNav activeTab="bills" />
     </View>
   );
 };

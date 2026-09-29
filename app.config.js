@@ -15,5 +15,15 @@ export default {
       FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
       FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
     },
+    plugins: [
+      "expo-font",
+      "expo-image",
+      "expo-router",
+      "expo-secure-store",
+      "expo-splash-screen",
+      "expo-status-bar",
+      "expo-web-browser",
+    ],
   },
 };
+

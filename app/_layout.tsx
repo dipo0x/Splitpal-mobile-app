@@ -1,9 +1,12 @@
 import { verifyFirebase } from "@/src/lib/firebase.lib";
 import { isSecureStorageAvailable } from "@/src/lib/securestorage.lib";
+import store from "@/src/store/store";
 import { useLoadFonts } from "@/src/utils/font.util";
 import { preloadImages } from "@/src/utils/preloadAssets";
 import { SplashScreen, Stack } from "expo-router";
 import React, { useEffect, useState } from "react";
+import { Provider } from "react-redux";
+import "react-native-reanimated";
 
 function RouteGuard({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
@@ -71,8 +74,10 @@ export default function RootLayout() {
   }
 
   return (
-    <RouteGuard>
-      <Stack screenOptions={{ headerShown: false }} />
-    </RouteGuard>
+    <Provider store={store}>
+      <RouteGuard>
+        <Stack screenOptions={{ headerShown: false }} />
+      </RouteGuard>
+    </Provider>
   );
 }

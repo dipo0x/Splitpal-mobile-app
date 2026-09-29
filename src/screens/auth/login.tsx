@@ -5,10 +5,12 @@ import SocialLoginCard from "@/src/components/ui/splash/SocialLoginCard";
 import AuthWrapper from "@/src/components/wrappers/auth/AuthWrapper";
 import { EMAIL, PASSWORD, SIGN_IN } from "@/src/const/auth.const";
 import { useAuth } from "@/src/hooks/useAuth";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
-const LoginScreen = ({ navigation }: any) => {
+const LoginScreen = () => {
+  const router = useRouter();
   const [email, setEmailAddress] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isChecked, setChecked] = useState(false);
@@ -48,7 +50,7 @@ const LoginScreen = ({ navigation }: any) => {
       else setFieldError("password", result.message);
       return;
     }
-    navigation.navigate("dashboard-stack", { screen: "home-screen" });
+    router.replace("/dashboard");
   };
 
   return (
@@ -187,7 +189,7 @@ const LoginScreen = ({ navigation }: any) => {
           </Text>
 
           <Pressable
-            onPress={() => navigation.navigate("signup-screen")}
+            onPress={() => router.push("/auth/signup")}
             android_ripple={{ color: "transparent" }}
             style={{ paddingLeft: 4 }}
             accessibilityRole="link"

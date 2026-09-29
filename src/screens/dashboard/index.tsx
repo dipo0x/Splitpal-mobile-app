@@ -13,7 +13,7 @@ import styles from "@/src/styles/dashboard/home.style";
 import React from "react";
 import {  ScrollView, Text, View } from "react-native";
 
-const HomeScreen = ({ navigation }: any) => {
+const HomeScreen = () => {
   // const { appUser } = useAuth();
   // const [notificationCount] = useState(1);
   const walletBalance = "50,000";
@@ -26,7 +26,7 @@ const HomeScreen = ({ navigation }: any) => {
         backgroundColor={styles.dashboardContainer.backgroundColor}
       />
 
-  <HeaderComponent navigation={navigation} />
+  <HeaderComponent />
     
       <ScrollView
         style={{ paddingVertical: 10, paddingTop: 0 }}
@@ -160,7 +160,7 @@ const HomeScreen = ({ navigation }: any) => {
           ))}
         </View>
       </ScrollView>
-      <BottomNav navigation={navigation} activeTab="home" />
+      <BottomNav activeTab="home" />
     </View>
   );
 };

@@ -10,6 +10,7 @@ import {
   USERNAME,
 } from "@/src/const/auth.const";
 import { useAuth } from "@/src/hooks/useAuth";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
@@ -21,7 +22,8 @@ type SignupErrors = {
   general?: string | null;
 };
 
-export default function SignUpScreen({ navigation }: any) {
+export default function SignUpScreen() {
+  const router = useRouter();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -61,7 +63,7 @@ export default function SignUpScreen({ navigation }: any) {
       return;
     }
 
-    navigation.navigate("auth-stack", { screen: "login-screen" });
+    router.replace("/auth/login");
   };
 
   return (
@@ -194,7 +196,7 @@ export default function SignUpScreen({ navigation }: any) {
           </Text>
 
           <Pressable
-            onPress={() => navigation.navigate("login-screen")}
+            onPress={() => router.push("/auth/login")}
             android_ripple={{ color: "transparent" }}
             style={{ paddingLeft: 4 }}
             accessibilityRole="link"

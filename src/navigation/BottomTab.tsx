@@ -1,5 +1,6 @@
 import NavIcon from "@/src/components/icons/NavBarIcon";
 import { AddBillModal } from "@/src/components/modals/AddBillModal";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   Platform,
@@ -15,13 +16,8 @@ type ActiveTab = "home" | "bills" | "wallet" | "account";
 const PURPLE = "rgba(123, 97, 255, 1)";
 const GRAY = "rgba(95, 99, 104, 1)";
 
-export function BottomNav({
-  navigation,
-  activeTab,
-}: {
-  navigation: any;
-  activeTab: ActiveTab;
-}) {
+export function BottomNav({ activeTab }: { activeTab: ActiveTab }) {
+  const router = useRouter();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleScanBill = () => {
@@ -42,17 +38,16 @@ export function BottomNav({
         <View style={styles.container}>
           <NavItem
             iconName="home"
-            route="dashboard-stack"
+            route="/dashboard"
             label="Home"
-            navigation={navigation}
+            router={router}
             active={activeTab === "home"}
           />
           <NavItem
             iconName="bills"
-            route="bills-stack"
-            subRoute="all-bills-screen"
+            route="/bills"
             label="Bills"
-            navigation={navigation}
+            router={router}
             active={activeTab === "bills"}
           />
           <View style={styles.fabWrapper}>
@@ -66,17 +61,17 @@ export function BottomNav({
 
           <NavItem
             iconName="wallet"
-            route="login-screen"
+            route="/auth/login"
             label="Wallet"
-            navigation={navigation}
+            router={router}
             active={activeTab === "wallet"}
           />
 
           <NavItem
             iconName="account"
-            route="login-screen"
+            route="/auth/login"
             label="Account"
-            navigation={navigation}
+            router={router}
             active={activeTab === "account"}
           />
         </View>
@@ -94,26 +89,18 @@ export function BottomNav({
 
 type NavItemProps = {
   iconName: "home" | "bills" | "wallet" | "account";
-  route: string;
+  route: Parameters<ReturnType<typeof useRouter>["push"]>[0];
   label: string;
-  navigation: any;
+  router: ReturnType<typeof useRouter>;
   active?: boolean;
-  subRoute?: string;
 };
 
-function NavItem({
-  iconName,
-  route,
-  label,
-  navigation,
-  active,
-  subRoute,
-}: NavItemProps) {
+function NavItem({ iconName, route, label, router, active }: NavItemProps) {
   return (
     <TouchableOpacity
       style={styles.item}
       onPress={() => {
-        navigation.navigate(route, subRoute ? { screen: subRoute } : undefined);
+        router.push(route);
       }}
     >
       <NavIcon
